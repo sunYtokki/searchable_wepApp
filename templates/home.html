@@ -1,0 +1,94 @@
+<head>  
+  <script> 
+    var data = {{data|tojson}}
+  </script>
+
+  <style>
+    .card-title{
+      font-size: 20px; 
+    }
+    .about{
+      font-size: 17px;
+      width: 100%;
+      background-color: rgb(234, 239, 255);
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+
+</head>
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<title>Home</title>
+<hr class="mb-0 mt-0">
+<div class="about mb-4 pt-2 pb-1">
+  Searchable database of live <span class="bold">music veneus in New York City.</span> You can also contribute by <span class="bold">adding a new venue</span> or <span class="bold"> wrting reviews.
+</div>
+
+<div class="container">  
+
+  <div class="card-deck mb-4">
+    {% for i in range(0,3) %}
+    <div class="card" >
+      <img src='{{data[i].image}}' class="card-img-top align-middle" alt="image of {{data[i].name}}">
+      <div class="card-body">
+        <a id="card{{data[i].id}}">
+        <h5 class="card-title">{{data[i].name}}</h5>
+        </a>
+        <p class="card-text text-truncate">{{data[i].description}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="card-deck mb-4">
+    {% for i in range(3,6) %}
+    <div class="card" >
+      <img src='{{data[i].image}}' class="card-img-top align-middle" alt="image of {{data[i].name}}">
+      <div class="card-body">
+        <a id="card{{data[i].id}}">
+        <h5 class="card-title">{{data[i].name}}</h5>
+        </a>
+        <p class="card-text text-truncate">{{data[i].description}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="card-deck mb-4">
+    {% for i in range(6,9) %}
+    <div class="card" >
+      <img src='{{data[i].image}}' class="card-img-top align-middle" alt="image of {{data[i].name}}">
+      <div class="card-body">
+        <a id="card{{data[i].id}}">
+        <h5 class="card-title">{{data[i].name}}</h5>
+        </a>
+        <p class="card-text text-truncate">{{data[i].description}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="card-deck mb-4">
+    {% for i in range(9,12) %}
+    <div class="card" >
+      <img src='{{data[i].image}}' class="card-img-top align-middle" alt="image of {{data[i].name}}">
+      <div class="card-body">
+        <a id="card{{data[i].id}}">
+        <h5 class="card-title">{{data[i].name}}</h5>
+        </a>
+        <p class="card-text text-truncate">{{data[i].description}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="div mb-5 card-title float-right">and more...</div>
+</div> <!-- container -->
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'home.js') }}"></script>
+
+{% endblock %}

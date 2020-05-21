@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- JQuery-->
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+	<!--Bootstrap-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+
+  <!--static files-->
+  <script type="text/javascript" src="{{ url_for('static', filename = 'base.js') }}"></script>
+
+  <style>
+    .bold{
+      font-weight: bold;
+    }
+    .verticalLine {
+      border-right: thin solid rgb(205, 212, 219);
+    }
+    .search_container{
+      width: 400px;
+    }
+    .error{        
+      color:rgb(247, 137, 94);
+    }
+    .hide{
+      height:0px;
+      visibility: hidden;
+    }
+  </style> 
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-light bg-light mb-0">
+    <a class="navbar-brand bold" href="/">NYC Music Veneus</a>
+    <div class="container my-2 align-self-center search_container">
+      <input class="form-control mr-2" id="search_input" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0 disabled" id="search_bttn">Search</button>
+    </div>
+    <!--<div id="search-error" class="error hide"> ← Please input search keyword</div>-->
+
+    <button class="navbar-toggler align-self-end" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse justify-content-end" id="navbarToggler"> 
+      <ul class="navbar-nav mr-2 mt-lg-0">
+        <li class="nav-item pr-1 verticalLine">
+          <a class="nav-link bold" 
+          href="http://127.0.0.1:5000/create">Create<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ml-1" href="/">Home</a>
+        </li>
+      </ul> 
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+</body>
+
+</html>

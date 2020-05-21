@@ -1,0 +1,47 @@
+<head>  
+  <script> 
+		var result = {{result|tojson}}
+		var key = {{key|tojson}}
+  </script>
+
+  <style>
+		.hl{
+			font-weight:bold;
+			background-color: orange;
+		}
+  </style>
+</head>
+
+{% extends "base.html" %}
+
+{% block content %} 
+
+<title>search result</title>
+
+<div class="container" id="results_field">  
+    
+	{% if result|length==0 %}
+	<p class="bold">No matching result.</p>
+
+	{% else %}
+	<p> <span class="bold">{{result|length}} </span> results found.</p>
+
+	{% for i in range(result|length) %}
+	<div class="row mb-4">
+		<div class="col-md-8">
+			<a class= "searchable" id="search{{result[i].id}}"> <h5> {{result[i].name|safe}} </h5> </a>	
+			<div class="searchable">{{result[i].description|safe}}  </div>
+		</div>
+		<div class="col-md-4">
+			<img class="fit-picture img-fluid" src= '{{result[i].image}}' art= "image of {{result[i].name}} " >
+		</div>
+	</div>
+	{% endfor %}
+
+	{% endif %}
+
+	</div> <!-- container -->
+	
+<script type="text/javascript" src="{{ url_for('static', filename = 'search.js')}}"></script>
+  
+{% endblock %}

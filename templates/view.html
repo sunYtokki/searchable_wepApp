@@ -1,0 +1,186 @@
+<head>
+  <script>
+    var desc = {{description|tojson}}
+    var rat = {{rating|tojson}}
+    var venue_id = {{venue_id|tojson}}
+  </script>
+
+  <!-- css sytle -->
+  <style>
+    .container {
+      /* width: 50%; */
+      margin: 0 auto;
+      float: none;
+      margin-bottom: 10px;
+    }
+
+    #name {
+      font-size: 20pt;
+      font-family: Arial;
+      font-weight: bolder;
+    }
+
+    hr {
+      width: 50%;
+      margin: 0 auto;
+      float: none;
+    }
+
+    .review-header {
+      font-family: Arial;
+      font-size: 13pt;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .hide {
+      height: 0px;
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+{% extends "base.html" %} 
+
+{% block content %}
+
+<title>{{ name }}</title>
+
+<!-- html body -->
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="card card-left ml-2">
+          <div class="card-body">
+            <div class="cart-title" id="name">
+              {{ name }}
+            </div>
+            <button
+              id="edit-bttn"
+              type="button"
+              class="btn btn-outline-primary btn-sm mb-3 float-right"
+            >
+              edit
+            </button>
+            <img
+              src="{{ img }}"
+              class="card-img-top img-fluid mb-3"
+              alt="{{ name }}"
+            />
+
+            <div id="dp-mode" class="">
+              <p class="card-text">{{ description }}</p>
+              <div>Rating: {{ rating }}</div>
+            </div>
+
+            <div id="edit-mode" class="hide">
+              <div class="edit-wrapper">
+                <textarea
+                  id="edit_description"
+                  rows="12"
+                  type="text"
+                  class="form-control mb-3"
+                ></textarea>
+                <textarea
+                  id="edit_rating"
+                  class="form-control mb-3"
+                  rows="1"
+                ></textarea>
+              </div>
+              <button
+                type="button"
+                id="submit-edit"
+                class="btn btn-outline-primary mt-1 mb-3 mr-1 btn-sm float-right"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                id="cancel_edit"
+                class="btn btn-outline-secondary mt-1 mr-2 btn-sm float-right"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-md-5">
+        <div class="review-header mt-4 mb-3">
+          Reviews
+          <button
+            type="button"
+            id="add_review"
+            class="btn btn-outline-primary btn-sm"
+          >
+            +add
+          </button>
+        </div>
+        <div class="card card-right" id="reviews">
+          <div id="new_review" class="hide">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="user name"
+              id="new-user"
+            />
+            <textarea
+              id="new-text"
+              class="form-control"
+              rows="6"
+              type="text"
+              placeholder="review"
+            ></textarea>
+            <div id="review-error" class="ml-1 hide error">
+              Please fill both fileds
+            </div>
+            <button
+              type="button"
+              id="submit"
+              class="btn btn-outline-primary mt-1 mb-3 mr-1 btn-sm float-right"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              id="cancel_review"
+              class="btn btn-outline-secondary mt-1 mr-2 btn-sm float-right"
+            >
+              Cancel
+            </button>
+          </div>
+          <!-- <div class="card-header">Reviews</div> -->
+
+          {% for i in range(reviews|length) %}
+            {% if reviews[i]["is_deleted"] == False %}
+              <div id = "{{ reviews[i]["id"] }}" class="card">
+                <div class="card-header bold">
+                  {{ reviews[i]["user"] }}
+                <button
+                  class="deleable btn btn-outline-secondary btn-sm float-right" >
+                  -
+                </button>
+                </div>
+                <div class="card-body">
+                  <div class="card-text">
+                    {{ reviews[i]["review"] }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div> <!-- row -->
+  </div> <!-- container -->
+  <script
+    type="text/javascript"
+    src="{{ url_for('static', filename = 'view.js')}}"
+  ></script>
+</body>
+
+{% endblock %}
